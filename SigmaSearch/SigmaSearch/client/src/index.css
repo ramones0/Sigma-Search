@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222.2 47.4% 11.2%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 192.9 82.3% 71%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #071330 0%, #0B2447 100%);
+    @apply font-sans text-foreground min-h-screen;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Exo 2', sans-serif;
+  }
+}
+
+@layer components {
+  .futuristic-input {
+    @apply bg-secondary/20 border border-secondary transition-all duration-300 focus:border-accent focus:shadow-[0_0_0_2px_rgba(165,215,232,0.3)] focus:bg-secondary/30;
+  }
+  
+  .glowing-border {
+    @apply relative;
+  }
+  
+  .glowing-border::after {
+    content: '';
+    @apply absolute inset-0 rounded shadow-none transition-shadow duration-300 pointer-events-none -z-10;
+  }
+  
+  .glowing-border:hover::after {
+    @apply shadow-glow;
+  }
+  
+  .gradient-button {
+    @apply bg-gradient-to-r from-secondary to-primary/80 transition-all duration-300 hover:bg-gradient-to-r hover:from-primary/80 hover:to-secondary hover:translate-y-[-2px];
+  }
+  
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(165, 215, 232, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(165, 215, 232, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center center;
+  }
+  
+  .animate-scanning {
+    @apply relative overflow-hidden;
+  }
+  
+  .animate-scanning::before {
+    content: '';
+    @apply absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-accent/20 to-transparent;
+    animation: scanning 2s infinite;
+  }
+  
+  @keyframes scanning {
+    0% { left: -100%; }
+    100% { left: 200%; }
+  }
+  
+  .results-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  @media (max-width: 640px) {
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 15px rgba(165, 215, 232, 0.5);
+  }
+  
+  .shadow-glow-sm {
+    box-shadow: 0 0 8px rgba(165, 215, 232, 0.4);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
